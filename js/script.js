@@ -2,6 +2,7 @@ let canvas = document.getElementById("canvas");
 const canvas2d = canvas.getContext("2d");
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
+let isAnimating = false;
 
 canvas.width = windowWidth;
 canvas.height = windowHeight;
@@ -11,7 +12,6 @@ console.log(canvas.height);
 let random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-console.log(random(10, 23));
 
 class Ball {
   constructor(x, y, horizontalSpeed, verticalSpeed, color, size) {
@@ -43,6 +43,8 @@ class Ball {
 let ballArray = [];
 
 function loop() {
+  if (!isAnimating) return;
+
   canvas2d.fillStyle = "rgba(255, 255, 255, 0.1)";
   canvas2d.fillRect(0, 0, canvas.width, canvas.height);
   for (let ball of ballArray) {
@@ -56,12 +58,17 @@ for (let i = 0; i < 10; i++) {
   let ball = new Ball(
     random(0, windowWidth),
     random(0, windowHeight),
-    random(-5, 5),
-    random(-5, 5),
+    random(1, 5),
+    random(2, 5),
     `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`,
-    random(10, 50)
+    random(20, 40)
   );
   ballArray.push(ball);
 }
 
-loop();
+document.getElementById("button").addEventListener("click", function () {
+  if (!isAnimating) {
+    isAnimating = true;
+    loop();
+  }
+});
