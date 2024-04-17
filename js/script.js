@@ -1,13 +1,29 @@
 let canvas = document.getElementById("canvas");
 const canvas2d = canvas.getContext("2d");
+canvas2d.backgroundColor = "black";
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
 let isAnimating = false;
-
+canvas2d.fillStyle = "blue";
 canvas.width = windowWidth;
 canvas.height = windowHeight;
 console.log(canvas.width);
 console.log(canvas.height);
+
+(() => {
+  const refs = {
+    openModalBtn: document.querySelector("[data-modal-open]"),
+    closeModalBtn: document.querySelector("[data-modal-close]"),
+    modal: document.querySelector("[data-modal]"),
+  };
+
+  refs.openModalBtn.addEventListener("click", toggleModal);
+  refs.closeModalBtn.addEventListener("click", toggleModal);
+
+  function toggleModal() {
+    refs.modal.classList.toggle("is-hidden");
+  }
+})();
 
 let random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -24,9 +40,14 @@ class Ball {
   }
   draw() {
     canvas2d.beginPath();
+    canvas2d.shadowBlur = 6;
+    canvas2d.shadowColor = this.color;
     canvas2d.fillStyle = this.color;
     canvas2d.arc(this.xValue, this.yValue, this.size, 0, 2 * Math.PI);
     canvas2d.fill();
+
+    canvas2d.shadowBlur = 0;
+    canvas2d.shadowColor = "transparent";
   }
   move() {
     this.xValue += this.horizontalSpeed;
@@ -65,10 +86,35 @@ for (let i = 0; i < 10; i++) {
   );
   ballArray.push(ball);
 }
+function applySettings() {
+  const ballSize = parseInt(document.getElementById("ballSize").value);
+  const ballCount = parseInt(document.getElementById("ballCount").value);
+  const colorRange = parseInt(document.getElementById("colorRange").value);
+
+  ballArray = [];
+
+  for (let i = 0; i < ballCount; i++) {
+    let ball = new Ball(
+      random(0, windowWidth),
+      random(0, windowHeight),
+      random(1, 5),
+      random(2, 5),
+      `rgb(${random(colorRange, 255)}, ${random(colorRange, 255)}, ${random(
+        colorRange,
+        255
+      )})`,
+      ballSize
+    );
+    ballArray.push(ball);
+  }
+
+  toggleModal();
+}
+
+document
+  .getElementById("applySettings")
+  .addEventListener("click", applySettings);
 
 document.getElementById("button").addEventListener("click", function () {
-  if (!isAnimating) {
-    isAnimating = true;
-    loop();
-  }
+  return !isAnimating ? ((isAnimating = true), loop()) : (isAnimating = false);
 });

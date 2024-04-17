@@ -8,7 +8,54 @@
   </head>
   <body>
     <canvas id="canvas" class="canvas"></canvas>
-    <button class="button" id="button">Press to start animation</button>
+    <button class="button" id="button">Press to start</button>
+    <button data-modal-open class="data-modal-open">
+      Відкрити налаштування
+    </button>
+
+    <div data-modal class="modal is-hidden">
+      <div class="modal-content">
+        <h2 class="modal-title">Налаштування кульок</h2>
+        <label for="ballSize" class="modal-label"
+          >Розмір кульки (від 20 до 40):</label
+        >
+        <input
+          type="number"
+          id="ballSize"
+          class="modal-input"
+          min="20"
+          max="40"
+          value="20"
+        />
+
+        <label for="ballCount" class="modal-label">Кількість кульок:</label>
+        <input
+          type="number"
+          id="ballCount"
+          class="modal-input"
+          min="1"
+          value="10"
+        />
+
+        <label for="colorRange" class="modal-label"
+          >Діапазон кольору (0-255):</label
+        >
+        <input
+          type="range"
+          id="colorRange"
+          class="modal-color-range"
+          min="0"
+          max="255"
+        />
+
+        <button id="applySettings" class="apply-setings modal-content-button">
+          Застосувати
+        </button>
+        <button data-modal-close class="data-modal-close modal-content-button">
+          Закрити
+        </button>
+      </div>
+    </div>
     <script src="./js/script.js"></script>
   </body>
 </html>
