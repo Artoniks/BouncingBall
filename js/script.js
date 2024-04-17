@@ -7,8 +7,6 @@ let isAnimating = false;
 canvas2d.fillStyle = "blue";
 canvas.width = windowWidth;
 canvas.height = windowHeight;
-console.log(canvas.width);
-console.log(canvas.height);
 
 (() => {
   const refs = {
