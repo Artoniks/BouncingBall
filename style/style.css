@@ -8,12 +8,21 @@ body {
   margin: 0;
   overflow: hidden;
 }
+input:focus,
+input:hover {
+  background-color: var(--main-active-color);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  color: var(--white);
+}
+
 :root {
   --main-bg-color: #090f21;
   --main-black-color: #7779ec;
   --main-active-color: #7c7fa0;
   --button-color: #0418f5;
   --hover-focus-animation: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --white: #ffffff;
+  --red: #971f1f;
 }
 .main-button-container {
   display: flex;
@@ -24,66 +33,9 @@ body {
   top: 50%;
   left: calc(50% - 179px);
 }
-/* .button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  color: var(--main-black-color);
-  background-color: var(--button-color);
-  opacity: 3;
-  border: none;
-  border-radius: 4px;
-  min-width: 169px;
-  height: 56px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  transition: background-color var(--hover-focus-animation),
-    box-shadow var(--hover-focus-animation);
-  opacity: 0.9;
-}
-
-.button:focus,
-.button:hover {
-  background-color: var(--main-active-color);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  opacity: 0.2;
-  color: var(-main-active-color);
-}
-.data-modal-open {
-  position: absolute;
-  top: 50%;
-  left: 37%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  color: var(--main-black-color);
-  background-color: var(--button-color);
-  border: none;
-  border-radius: 4px;
-  min-width: 180px;
-  height: 56px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-} */
 
 .button,
 .data-modal-open {
-  font-family: "Roboto", sans-serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.5;
@@ -97,7 +49,7 @@ body {
   height: 56px;
   transition: background-color var(--hover-focus-animation),
     box-shadow var(--hover-focus-animation);
-  opacity: 0.9;
+  opacity: 0.5;
 }
 
 .button:focus,
@@ -123,17 +75,15 @@ body {
   z-index: 1000;
 }
 .modal-title {
-  padding-bottom: 20px;
+  padding-bottom: 40px;
+  text-align: center;
 }
 .modal-content {
   background-color: #fff;
-  padding-left: 20px;
-  padding-bottom: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
+  padding: 50px;
   border-radius: 20px;
-  width: 300px;
-  height: 400px;
+  width: 400px;
+  height: 500px;
 }
 .modal-input {
   width: 100%;
@@ -147,6 +97,7 @@ body {
   gap: 8px;
   background-color: transparent;
   margin-bottom: 15px;
+  font-size: inherit;
 }
 .modal-color-range {
   padding: 0 0;
@@ -156,16 +107,20 @@ body {
 .modal-label {
   display: block;
   margin-bottom: 6px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 14px;
   letter-spacing: 0.01em;
 }
 .button-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  margin-top: 40px;
 }
-.modal-content-button {
-  font-family: "Roboto", sans-serif;
+.apply-setings,
+.data-modal-close {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
@@ -175,8 +130,23 @@ body {
   border-radius: 4px;
   min-width: 69px;
   height: 45px;
+  padding: 10px 20px;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
-
+.apply-setings:focus,
+.apply-setings:hover {
+  background-color: #1f2999;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  color: var(--white);
+}
+.data-modal-close:focus,
+.data-modal-close:hover {
+  background-color: #971f1f;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  color: var(--white);
+}
 .is-hidden {
   display: none;
 }
